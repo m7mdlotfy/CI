@@ -22,7 +22,7 @@ workflows:
   welcome:
     jobs:
       - say-hello
-      - say-world
+      - say-world:
             requires:
                  - say-hello
 
