@@ -24,7 +24,9 @@ jobs:
       - checkout
       - run:
           name: "print my name env variable"
-          command: " echo $MY_NAME "
+          command: |
+               echo $MY_NAME 
+               echo $CIRCLE_BRANCH
             
 workflows:
   welcome:
