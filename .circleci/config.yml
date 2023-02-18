@@ -24,8 +24,8 @@ jobs:
       - checkout
       - run:
           name: "print my name env variable"
-          command: |
-            echo $MY_NAME
+          command: "echo $MY_NAME"
+            
 workflows:
   welcome:
     jobs:
