@@ -19,7 +19,7 @@ jobs:
           command: "echo World"
   print-myname-var:
     docker:
-      - image: cimg/base:2020.01
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
@@ -27,6 +27,22 @@ jobs:
           command: |
                echo $MY_NAME 
                echo $CIRCLE_BRANCH
+  save_output_sharingfiles:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run: echo "this job is created to test file sharing in circleci" > ~/output.txt
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - output.txt
+  print_output_sharingfile:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: cat ~/output.txt
             
 workflows:
   welcome:
@@ -36,3 +52,7 @@ workflows:
             requires:
                  - say-hello
       - print-myname-var
+      - save_output_sharingfiles
+      - print_output_sharingfile:
+            requires:
+                 - save_output_sharingfiles
