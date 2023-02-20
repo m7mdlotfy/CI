@@ -33,7 +33,7 @@ jobs:
     steps:
       - run: echo "this job is created to test file sharing in circleci" > ~/output.txt
       - persist_to_workspace:
-          root: ~/
+          root: ~/Desktop/aws/CICD/CI/
           paths:
             - output.txt
   print_output_sharingfile:
@@ -41,8 +41,8 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
+          at: ~/Desktop/aws/CICD/CI/
+      - run: cat ~/Desktop/aws/CICD/CI/output.txt
             
 workflows:
   welcome:
